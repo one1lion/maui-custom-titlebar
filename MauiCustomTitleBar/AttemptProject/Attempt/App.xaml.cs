@@ -1,4 +1,4 @@
-﻿namespace MauiCustomTitleBar.CustomizeAttempt;
+﻿namespace MauiCustomTitleBar.Attempt;
 
 public partial class App : Application
 {

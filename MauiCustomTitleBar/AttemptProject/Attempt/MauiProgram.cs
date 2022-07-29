@@ -1,7 +1,8 @@
 ﻿using MauiCustomTitleBar.Shared.ServiceInterfaces;
 using MauiCustomTitleBar.Shared.Services;
+using Microsoft.Maui.LifecycleEvents;
 
-namespace MauiCustomTitleBar.CustomizeAttempt;
+namespace MauiCustomTitleBar.Attempt;
 
 public static class MauiProgram
 {
@@ -13,6 +14,16 @@ public static class MauiProgram
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+            })
+            .ConfigureLifecycleEvents(lifecycle =>
+            {
+#if WINDOWS
+                lifecycle.AddWindows(windows => windows.OnWindowCreated(window =>
+                {
+                    //window.ExtendsContentIntoTitleBar = true;
+                    // This doesn't seem to make a difference
+                }));
+#endif
             });
 
         builder.Services.AddMauiBlazorWebView();
