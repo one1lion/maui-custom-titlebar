@@ -17,7 +17,7 @@ namespace MauiCustomTitleBar.BlazorHybrid
 
             builder.Services.AddMauiBlazorWebView();
 #if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
+		    builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
 
             builder.Services.AddSingleton<WeatherForecastService>();

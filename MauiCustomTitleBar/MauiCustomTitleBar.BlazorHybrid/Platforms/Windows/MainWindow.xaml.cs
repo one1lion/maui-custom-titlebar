@@ -20,16 +20,60 @@ namespace MauiCustomTitleBar.BlazorHybrid.WinUI;
 
 public partial class MainWindow : Window
 {
-    private IntPtr _hWnd = IntPtr.Zero;
-    private AppWindow _appW = null;
+    #region Private Fields and Properties
+    private readonly IntPtr _hWnd = IntPtr.Zero;
+    private readonly AppWindow _appW = null;
 
-    private TranslateTransform _translateTransform1 = null;
-    private TransformGroup _trfg1 = null;
-    private TextBlock _text1 = null;
-    private Border _border1 = null;
-    private double _nCurrentTranslateTransformX = 0;
-    private double _nTextX = 0;
+    private TranslateTransform _scrollTransform = null;
+    private TransformGroup _transformGroup = null;
+    private TextBlock _scrollingTextBlock = null;
+    private Border _scrollBlockBorder = null;
+    private double _curScrollTransform = 0;
+    private double _curTextX = 0;
 
+    private float _scrollSpeed = 1.0f;
+    private bool _performRender;
+
+    private float ScrollSpeed
+    {
+        get => _scrollSpeed;
+        set
+        {
+            _scrollSpeed = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ScrollSpeed)));
+        }
+    }
+    #endregion Private Fields and Properties
+
+    #region Public Fields and Properties
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public double SetSpeed(float? x) => _scrollSpeed;
+    public float? GetSpeed(double x) => ScrollSpeed = (float)x;
+
+    private void Render()
+    {
+        if (_scrollingTextBlock != null)
+        {
+            if (_scrollTransform == null)
+            {
+                _scrollTransform = new TranslateTransform();
+                _transformGroup = new TransformGroup();
+                _transformGroup.Children.Add(_scrollTransform);
+                _scrollingTextBlock.RenderTransform = _transformGroup;
+            }
+
+            _scrollTransform.X = _curTextX;
+            _curTextX -= _scrollSpeed;
+            if (_curTextX <= -_scrollingTextBlock.ActualWidth)
+            {
+                _curTextX = _curScrollTransform;
+            }
+        }
+    }
+    #endregion
+
+    #region Constructor
     public MainWindow()
     {
         InitializeComponent();
@@ -44,64 +88,30 @@ public partial class MainWindow : Window
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
 
-        CompositionTarget.Rendering += CompositionTarget_Rendering;
+        CompositionTarget.Rendering += HandleCompositionTargetRendering;
     }
+    #endregion
 
-    public event PropertyChangedEventHandler PropertyChanged;
-    private float _scrollSpeed = 1.0f;
-
-    private float ScrollSpeed
+    private void HandleCompositionTargetRendering(object sender, object e)
     {
-        get => _scrollSpeed;
-        set
+        if (_performRender)
         {
-            _scrollSpeed = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ScrollSpeed)));
-        }
-    }
-    public double SetSpeed(float? x) => _scrollSpeed;
-    public float? GetSpeed(double x) => ScrollSpeed = (float)x;
-
-    private void CompositionTarget_Rendering(object sender, object e)
-    {
-        if (bRender)
             Render();
-    }
-
-    private void myButton_Click(object sender, RoutedEventArgs e)
-    {
-        ShowScrollingText(!bRender);
-    }
-
-    private bool bRender = false;
-    private void Render()
-    {
-        if (_text1 != null)
-        {
-            if (_translateTransform1 == null)
-            {
-                _translateTransform1 = new TranslateTransform();
-                _trfg1 = new TransformGroup();
-                _trfg1.Children.Add(_translateTransform1);
-                _text1.RenderTransform = _trfg1;
-            }
-
-            _translateTransform1.X = _nTextX;
-            _nTextX -= _scrollSpeed;
-            if (_nTextX <= -_text1.ActualWidth)
-            {
-                _nTextX = _nCurrentTranslateTransformX;
-            }
         }
     }
 
-    private void ShowScrollingText(bool bShow)
+    private void ToggleScrollingTextVisible(object sender, RoutedEventArgs e)
     {
-        if (bShow)
+        ShowScrollingText(!_performRender);
+    }
+
+    private void ShowScrollingText(bool show)
+    {
+        if (show)
         {
-            if (_text1 == null && _border1 == null)
+            if (_scrollingTextBlock == null && _scrollBlockBorder == null)
             {
-                _text1 = new TextBlock()
+                _scrollingTextBlock = new TextBlock()
                 {
                     Text = "This is a scrolling text",
                     FontFamily = new FontFamily("Times New Roman"),
@@ -110,45 +120,45 @@ public partial class MainWindow : Window
                     TextTrimming = TextTrimming.None,
                     Foreground = new SolidColorBrush(Colors.Lime)
                 };
-                _text1.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                _text1.Margin = new Thickness(0, 0, -_text1.ActualWidth, 0);
+                _scrollingTextBlock.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                _scrollingTextBlock.Margin = new Thickness(0, 0, -_scrollingTextBlock.ActualWidth, 0);
 
-                _border1 = new Border()
+                _scrollBlockBorder = new Border()
                 {
                     BorderBrush = new SolidColorBrush(Color.FromArgb(100, 255, 0, 0)),
                     BorderThickness = new Thickness(2),
                     Margin = new Thickness(190, 1, 98, 1),
-                    Child = _text1,
+                    Child = _scrollingTextBlock,
                     Background = new SolidColorBrush(Colors.Black)
                 };
 
-                _border1.SizeChanged += Border1_SizeChanged;
-                _border1.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                _nTextX = _border1.DesiredSize.Width;
+                _scrollBlockBorder.SizeChanged += HandleBorderSizeChanged;
+                _scrollBlockBorder.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                _curTextX = _scrollBlockBorder.DesiredSize.Width;
 
-                _border1.SetValue(Grid.RowProperty, 1);
-                _border1.SetValue(Grid.ColumnProperty, 1);
-                AppTitleBar.Children.Add(_border1);
+                _scrollBlockBorder.SetValue(Grid.RowProperty, 1);
+                _scrollBlockBorder.SetValue(Grid.ColumnProperty, 1);
+                AppTitleBar.Children.Add(_scrollBlockBorder);
             }
-            _text1.Visibility = Visibility.Visible;
-            _border1.Visibility = Visibility.Visible;
-            sliderSpeed.Visibility = Visibility.Visible;
-            myButton.Content = "Hide Scrolling text";
-            bRender = true;
+            _scrollingTextBlock.Visibility = Visibility.Visible;
+            _scrollBlockBorder.Visibility = Visibility.Visible;
+            SpeedSlider.Visibility = Visibility.Visible;
+            ScrollTextButton.Content = "Hide Scrolling text";
+            _performRender = true;
         }
         else
         {
-            _text1.Visibility = Visibility.Collapsed;
-            _border1.Visibility = Visibility.Collapsed;
-            sliderSpeed.Visibility = Visibility.Collapsed;
-            myButton.Content = "Show Scrolling text";
-            bRender = false;
+            _scrollingTextBlock.Visibility = Visibility.Collapsed;
+            _scrollBlockBorder.Visibility = Visibility.Collapsed;
+            SpeedSlider.Visibility = Visibility.Collapsed;
+            ScrollTextButton.Content = "Show Scrolling text";
+            _performRender = false;
         }
     }
 
-    private void Border1_SizeChanged(object sender, SizeChangedEventArgs e)
+    private void HandleBorderSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        _nCurrentTranslateTransformX = e.NewSize.Width;
+        _curScrollTransform = e.NewSize.Width;
         var rg = new RectangleGeometry
         {
             Rect = new Rect(0, 0, e.NewSize.Width, e.NewSize.Height)
