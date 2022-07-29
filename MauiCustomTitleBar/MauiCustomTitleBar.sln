@@ -3,14 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCustomTitleBar.RegularMaui", "MauiCustomTitleBar.RegularMaui\MauiCustomTitleBar.RegularMaui.csproj", "{BE3F76D3-7231-47BD-838B-A4FDDEE2B3A8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F54049F-2104-4932-8B98-7D86E1FA4079}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiCustomTitleBar.BlazorHybrid", "MauiCustomTitleBar.BlazorHybrid\MauiCustomTitleBar.BlazorHybrid.csproj", "{3134469B-3375-46CA-9A65-DC480C81BD38}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "All Projects Start Like This (Change Branch to see different tries)", "All Projects Start Like This (Change Branch to see different tries)", "{2187010D-A8E4-4B0F-A0AD-E043487F2D83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Non-Maui Stuff (Shared UI and Library)", "Non-Maui Stuff (Shared UI and Library)", "{969D10DF-5918-4F24-8213-43CBF3725835}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCustomTitleBar.Shared", "SetupAndReusableParts\MauiCustomTitleBar.Shared\MauiCustomTitleBar.Shared.csproj", "{8390DA58-659F-40DC-B1AF-863A83CC10B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCustomTitleBar.BlazorUi", "SetupAndReusableParts\MauiCustomTitleBar.BlazorUi\MauiCustomTitleBar.BlazorUi.csproj", "{B16AA589-21CA-482A-8642-6F37BCFDE527}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCustomTitleBar.BasicSetup", "CleanVersion\MauiCustomTitleBar.BasicSetup\MauiCustomTitleBar.BasicSetup.csproj", "{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,21 +24,28 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BE3F76D3-7231-47BD-838B-A4FDDEE2B3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE3F76D3-7231-47BD-838B-A4FDDEE2B3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE3F76D3-7231-47BD-838B-A4FDDEE2B3A8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{BE3F76D3-7231-47BD-838B-A4FDDEE2B3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE3F76D3-7231-47BD-838B-A4FDDEE2B3A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE3F76D3-7231-47BD-838B-A4FDDEE2B3A8}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{3134469B-3375-46CA-9A65-DC480C81BD38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3134469B-3375-46CA-9A65-DC480C81BD38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3134469B-3375-46CA-9A65-DC480C81BD38}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{3134469B-3375-46CA-9A65-DC480C81BD38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3134469B-3375-46CA-9A65-DC480C81BD38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3134469B-3375-46CA-9A65-DC480C81BD38}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8390DA58-659F-40DC-B1AF-863A83CC10B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8390DA58-659F-40DC-B1AF-863A83CC10B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8390DA58-659F-40DC-B1AF-863A83CC10B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8390DA58-659F-40DC-B1AF-863A83CC10B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B16AA589-21CA-482A-8642-6F37BCFDE527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16AA589-21CA-482A-8642-6F37BCFDE527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16AA589-21CA-482A-8642-6F37BCFDE527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16AA589-21CA-482A-8642-6F37BCFDE527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8390DA58-659F-40DC-B1AF-863A83CC10B0} = {969D10DF-5918-4F24-8213-43CBF3725835}
+		{B16AA589-21CA-482A-8642-6F37BCFDE527} = {969D10DF-5918-4F24-8213-43CBF3725835}
+		{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F} = {2187010D-A8E4-4B0F-A0AD-E043487F2D83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
