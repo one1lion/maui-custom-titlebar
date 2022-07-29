@@ -1,8 +1,8 @@
 ﻿<maui:MauiWinUIApplication
-    x:Class="MauiCustomTitleBar.CustomizeAttempt.WinUI.App"
+    x:Class="MauiCustomTitleBar.Attempt.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maui="using:Microsoft.Maui"
-    xmlns:local="using:MauiCustomTitleBar.CustomizeAttempt.WinUI">
+    xmlns:local="using:MauiCustomTitleBar.Attempt.WinUI">
 
 </maui:MauiWinUIApplication>

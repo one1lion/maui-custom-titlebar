@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.companyname.mauicustomtitlebar.CustomizeAttempt" version="1.0.0" api-version="7" xmlns="http://tizen.org/ns/packages">
+<manifest package="com.companyname.mauicustomtitlebar.Attempt" version="1.0.0" api-version="7" xmlns="http://tizen.org/ns/packages">
   <profile name="common" />
-  <ui-application appid="com.companyname.mauicustomtitlebar.CustomizeAttempt" exec="MauiCustomTitleBar.CustomizeAttempt.dll" multiple="false" nodisplay="false" taskmanage="true" type="dotnet" launch_mode="single">
-    <label>MauiCustomTitleBar.CustomizeAttempt</label>
+  <ui-application appid="com.companyname.mauicustomtitlebar.Attempt" exec="MauiCustomTitleBar.Attempt.dll" multiple="false" nodisplay="false" taskmanage="true" type="dotnet" launch_mode="single">
+    <label>MauiCustomTitleBar.Attempt</label>
     <icon>appicon.xhigh.png</icon>
     <metadata key="http://tizen.org/metadata/prefer_dotnet_aot" value="true" />
   </ui-application>

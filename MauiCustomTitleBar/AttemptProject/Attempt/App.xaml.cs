@@ -1,11 +1,4 @@
-﻿using Microsoft.UI;
-using WinRT.Interop;
-
-#if WINDOWS
-using Microsoft.UI.Windowing;
-#endif
-
-namespace MauiCustomTitleBar.CustomizeAttempt;
+﻿namespace MauiCustomTitleBar.Attempt;
 
 public partial class App : Application
 {

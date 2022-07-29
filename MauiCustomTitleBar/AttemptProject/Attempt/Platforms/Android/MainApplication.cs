@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace MauiCustomTitleBar.CustomizeAttempt;
+namespace MauiCustomTitleBar.Attempt;
 
 [Application]
 public class MainApplication : MauiApplication
