@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace MauiCustomTitleBar.CustomizeAttempt;
+namespace MauiCustomTitleBar.Attempt;
 
 public class Program
 {

@@ -1,7 +1,7 @@
 ﻿using MauiCustomTitleBar.Shared.ServiceInterfaces;
 using MauiCustomTitleBar.Shared.Services;
 
-namespace MauiCustomTitleBar.CustomizeAttempt;
+namespace MauiCustomTitleBar.Attempt;
 
 public static class MauiProgram
 {

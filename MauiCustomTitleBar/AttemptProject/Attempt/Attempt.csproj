@@ -53,4 +53,10 @@
 	  <ProjectReference Include="..\..\SetupAndReusableParts\BlazorUi\BlazorUi.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Platforms\Windows\MainWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

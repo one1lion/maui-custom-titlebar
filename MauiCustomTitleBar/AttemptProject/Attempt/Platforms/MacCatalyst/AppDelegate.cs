@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace MauiCustomTitleBar.CustomizeAttempt;
+namespace MauiCustomTitleBar.Attempt;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
