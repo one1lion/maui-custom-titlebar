@@ -8,15 +8,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "All Projects Start Like This (Change Branch to see different tries)", "All Projects Start Like This (Change Branch to see different tries)", "{2187010D-A8E4-4B0F-A0AD-E043487F2D83}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Attempts (Change Branch to see different tries)", "Attempts (Change Branch to see different tries)", "{2187010D-A8E4-4B0F-A0AD-E043487F2D83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Non-Maui Stuff (Shared UI and Library)", "Non-Maui Stuff (Shared UI and Library)", "{969D10DF-5918-4F24-8213-43CBF3725835}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCustomTitleBar.Shared", "SetupAndReusableParts\MauiCustomTitleBar.Shared\MauiCustomTitleBar.Shared.csproj", "{8390DA58-659F-40DC-B1AF-863A83CC10B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "SetupAndReusableParts\Shared\Shared.csproj", "{8390DA58-659F-40DC-B1AF-863A83CC10B0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCustomTitleBar.BlazorUi", "SetupAndReusableParts\MauiCustomTitleBar.BlazorUi\MauiCustomTitleBar.BlazorUi.csproj", "{B16AA589-21CA-482A-8642-6F37BCFDE527}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUi", "SetupAndReusableParts\BlazorUi\BlazorUi.csproj", "{B16AA589-21CA-482A-8642-6F37BCFDE527}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiCustomTitleBar.BasicSetup", "CleanVersion\MauiCustomTitleBar.BasicSetup\MauiCustomTitleBar.BasicSetup.csproj", "{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attempt", "AttemptProject\Attempt\Attempt.csproj", "{8BADB86D-1EB1-4AAE-9D87-DE70FF834B6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
