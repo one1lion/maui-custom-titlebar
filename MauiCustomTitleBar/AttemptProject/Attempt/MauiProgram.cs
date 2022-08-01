@@ -1,6 +1,7 @@
 ﻿using MauiCustomTitleBar.Shared.ServiceInterfaces;
 using MauiCustomTitleBar.Shared.Services;
 using Microsoft.Maui.LifecycleEvents;
+using MauiCustomTitleBar.Shared.State;
 
 namespace MauiCustomTitleBar.Attempt;
 
@@ -30,6 +31,8 @@ public static class MauiProgram
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
+
+        builder.Services.AddSingleton<ColorState>();
 
         builder.Services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
 

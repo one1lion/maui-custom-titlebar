@@ -1,14 +1,25 @@
 ﻿@page "/"
+@using System.Drawing
 
 <h1>Hello, world!</h1>
 
 <p>
     This is the setup for attempting to apply use a <code>DataTemplate</code> in the Windows Platform <code>App.xaml</code>
     file, and using the <code>ExtendsContentIntoTitleBar</code> setting.  Although, while putting this together, this setting
-    didn't seem to affect the behavior.  While putting this together, I was able to see set the background and foreground 
-    colors of the title bar.  My next step with this sample is to figure out if I can change the colors at runtime without 
+    didn't seem to affect the behavior.  While putting this together, I was able to see set the background and foreground
+    colors of the title bar.  My next step with this sample is to figure out if I can change the colors at runtime without
     the same rendering issues I've run into before.  I also don't like that it seems like there is a translucent element
-    covering the ContentControl porition of the title bar.  
+    covering the ContentControl porition of the title bar.
+</p>
+<p>
+    Here's my attempt to dynamically set the title bar color at runtime.
+    <input type="color" @bind=CurColor @bind:event="oninput" />
+    @CurColor<br />
+    <strong>Note</strong>: At the moment, all of the underlying code is setup to update a resource dictionary key 
+    (<code>TitleBarBackgroundColor</code>) defined in the <code>App.xaml</code> file in the Windows platform-specific
+    folder.  However, when I try to use the color using the <code>StaticResource</code> markup extension, I get a runtime
+    error.  I think I'm supposed to be using the `Style` property somehow.  I will continue trying things and update this
+    as I figure more out, but wanted to push my current progress.
 </p>
 <p>
     My original cries for help can be found
@@ -25,3 +36,18 @@
         <li><a href="https://docs.microsoft.com/en-us/dotnet/maui/fundamentals/app-lifecycle" target="_blank">Microsoft Doc on the App Lifecycle</a> <i class="text-primary small oi oi-external-link"></i> - I was pointed to this resource by James Montemagno today (relative to the time I am typing this out) and still need to review it.  It sounds like the primary takeaway from this document is to use the <code>lifecycle.AddWindows</code> to use the <code>ExtendsTitleIntoTitleBar</code> switch, which I talked about in the previous bullet.  I still need to read through the document, though, to see if there is more information that can help with the issue I ran into while trying to do that.</li>
     </ul>
 </p>
+
+@code {
+    [Inject] private ColorState ColorState { get; set; } = default!;
+
+    private string CurColor
+    {
+        get => ColorTranslator.ToHtml(ColorState.Color);
+        set
+        {
+            // Value is a hex code
+            ColorState.Color = ColorTranslator.FromHtml(value);
+        }
+    }
+
+}

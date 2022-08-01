@@ -6,6 +6,13 @@
     <Application.Resources>
         <ResourceDictionary>
 
+            <SolidColorBrush x:Key="TitleBarBackgroundColor" Color="#000"></SolidColorBrush>
+            <Color x:Key="TitleBarForegroundColor">#FFF</Color>
+
+            <Style TargetType="Grid" x:Key="CustomTitleBar">
+                <Setter Property="Background" Value="{DynamicResource TitleBarBackgroundColor}" />
+            </Style>
+
             <Color x:Key="PageBackgroundColor">#512bdf</Color>
             <Color x:Key="PrimaryTextColor">White</Color>
 

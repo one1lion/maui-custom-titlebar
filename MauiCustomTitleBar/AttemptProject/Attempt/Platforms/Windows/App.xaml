@@ -2,40 +2,56 @@
     x:Class="MauiCustomTitleBar.Attempt.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:xMaui="using:Microsoft.Maui.Controls.Xaml"
     xmlns:maui="using:Microsoft.Maui"
     xmlns:local="using:MauiCustomTitleBar.Attempt.WinUI">
 
     <maui:MauiWinUIApplication.Resources>
-        <DataTemplate x:Key="MauiAppTitleBarContainerTemplate">
-            <Grid HorizontalAlignment="Stretch"
-                  Background="#FF0000">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="50"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+        <ResourceDictionary>
+            <!--
+            <Color x:Key="TitleBarBackgroundColor">#000</Color>
+            <Color x:Key="TitleBarForegroundColor">#FFF</Color>
+            -->
+            
+            <!-- DynamicResource does not exist, so I cannot use it here -->
+            <!--
+            <Style TargetType="Grid">
+                <Setter Property="Background" Value="{DynamicResource TitleBarBackgroundColor}" />
+            </Style>
+            -->
+            
+            <DataTemplate x:Key="MauiAppTitleBarContainerTemplate">
+                <Grid HorizontalAlignment="Stretch"
+                      Background="#FF0000">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0">Interactable Button</Button>
-                <Image Grid.Column="1" Source="dotnet_bot.svg"></Image>
-                <ContentControl Grid.Column="2"
-                                IsTabStop="False"
-                                HorizontalContentAlignment="Stretch"
-                                VerticalContentAlignment="Stretch"
-                                Background="#FF0000"
-                                Foreground="#00FF00"
-                                x:Name="AppTitleBarContentControl">
-                    <Grid HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0">Interactable Button</Button>
+                    <Image Grid.Column="1" Source="dotnet_bot.svg"></Image>
+                    <ContentControl Grid.Column="2"
+                                    IsTabStop="False"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    Background="#FF0000"
+                                    Foreground="#00FF00"
+                                    x:Name="AppTitleBarContentControl">
+                        <Grid HorizontalAlignment="Stretch"
+                              Background="#FF0000">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center">Content inside of the ContentControl. How do I change the background color?</TextBlock>
-                        <Button Grid.Column ="1">Non-interactable button</Button>
-                    </Grid>
-                </ContentControl>
-            </Grid>
-        </DataTemplate>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center">Content inside of the ContentControl.</TextBlock>
+                            <Button Grid.Column ="1">Non-interactable button</Button>
+                        </Grid>
+                    </ContentControl>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
     </maui:MauiWinUIApplication.Resources>
 </maui:MauiWinUIApplication>
