@@ -1,10 +1,15 @@
-﻿namespace MauiCustomTitleBar.Attempt;
+﻿using MauiCustomTitleBar.Shared.State;
+
+namespace MauiCustomTitleBar.Attempt;
 
 public partial class App : Application
 {
-    public App()
+    private readonly ColorState _colorState;
+    
+    public App(ColorState colorState)
     {
         InitializeComponent();
+        _colorState = colorState;
 
         MainPage = new MainPage();
     }

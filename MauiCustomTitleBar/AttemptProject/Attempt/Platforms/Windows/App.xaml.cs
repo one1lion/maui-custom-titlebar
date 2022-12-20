@@ -1,7 +1,10 @@
-﻿using Microsoft.Maui.Handlers;
+﻿using MauiCustomTitleBar.Shared.State;
+using Microsoft.Maui.Handlers;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
+using System.Diagnostics;
 using WinRT.Interop;
+using ColorTranslator = System.Drawing.ColorTranslator;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -13,6 +16,8 @@ namespace MauiCustomTitleBar.Attempt.WinUI;
 /// </summary>
 public partial class App : MauiWinUIApplication
 {
+    private ColorState _colorState;
+
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code
     /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -23,6 +28,9 @@ public partial class App : MauiWinUIApplication
 
         WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
         {
+            _colorState = handler.MauiContext.Services.GetRequiredService<ColorState>();
+            _colorState.PropertyChanged += HandleColorChanged;
+
             var nativeWindow = handler.PlatformView;
             nativeWindow.Activate();
 
@@ -47,4 +55,20 @@ public partial class App : MauiWinUIApplication
     }
 
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+
+    private void HandleColorChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ColorState.Color))
+        {
+            var resources = Current.Resources;
+            if (!resources.ContainsKey("TitleBarBackgroundColor"))
+            {
+                Debug.WriteLine("Main App: Could not find the resource 'TitleBarBackgroundColor' in the dictionary.");
+                return;
+            }
+
+            resources["TitleBarBackgroundColor"] = Color.Parse(ColorTranslator.ToHtml(_colorState.Color));
+            Debug.WriteLine($"Main App: Successfully updated the resource 'TitleBarBackgroundColor' in the dictionary to {resources["TitleBarBackgroundColor"]}.");
+        }
+    }
 }

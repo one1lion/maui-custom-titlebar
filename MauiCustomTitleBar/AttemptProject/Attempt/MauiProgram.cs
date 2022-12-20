@@ -1,5 +1,6 @@
 ﻿using MauiCustomTitleBar.Shared.ServiceInterfaces;
 using MauiCustomTitleBar.Shared.Services;
+using MauiCustomTitleBar.Shared.State;
 
 namespace MauiCustomTitleBar.Attempt;
 
@@ -21,7 +22,7 @@ public static class MauiProgram
 #endif
 
         builder.Services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
-
+        builder.Services.AddSingleton<ColorState>();
         return builder.Build();
     }
 }

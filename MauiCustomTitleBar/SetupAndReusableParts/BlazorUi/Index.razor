@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Drawing;
 
 <h1>Hello, world!</h1>
 
@@ -6,6 +7,16 @@
     This is the setup for using the title bar customization API.  The title bar color should be different than the
     standard color, but only when running on Windows 11.  This is the effect I am going for.  I would also like to 
     be able to change this at runtime (using a theme switch and a state class that has <code>INotifyPropertyChanged</code>).
+</p>
+<p>
+    Here's my attempt to dynamically set the title bar color at runtime.
+    <input type="color" @bind=CurColor @bind:event="oninput" />
+    @CurColor<br />
+    <strong>Note</strong>: At the moment, all of the underlying code is setup to update a resource dictionary key 
+    (<code>TitleBarBackgroundColor</code>) defined in the <code>App.xaml</code> file in the Windows platform-specific
+    folder.  However, when I try to use the color using the <code>StaticResource</code> markup extension, I get a runtime
+    error.  I think I'm supposed to be using the `Style` property somehow.  I will continue trying things and update this
+    as I figure more out, but wanted to push my current progress.
 </p>
 <p>
     The two files of interest are both in the Attempt project:
@@ -39,3 +50,18 @@
         <li><a href="https://docs.microsoft.com/en-us/dotnet/maui/fundamentals/app-lifecycle" target="_blank">Microsoft Doc on the App Lifecycle</a> <i class="text-primary small oi oi-external-link"></i> - I was pointed to this resource by James Montemagno today (relative to the time I am typing this out) and still need to review it.  It sounds like the primary takeaway from this document is to use the <code>lifecycle.AddWindows</code> to use the <code>ExtendsTitleIntoTitleBar</code> switch, which I talked about in the previous bullet.  I still need to read through the document, though, to see if there is more information that can help with the issue I ran into while trying to do that.</li>
     </ul>
 </p>
+
+@code {
+    [Inject] private ColorState ColorState { get; set; } = default!;
+
+    private string CurColor
+    {
+        get => ColorTranslator.ToHtml(ColorState.Color);
+        set
+        {
+            // Value is a hex code
+            ColorState.Color = ColorTranslator.FromHtml(value);
+        }
+    }
+
+}
